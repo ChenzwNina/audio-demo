@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion TTS Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Note */
+    .note-box {
+      background: #1a2a4a;
+      border-left: 3px solid #a0a0ff;
+      border-radius: 0 8px 8px 0;
+      padding: 16px;
+      margin: 24px 0;
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+    .note-box strong {
+      color: #a0a0ff;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      min-height: 100vh;
+      background: #0f1a30;
+      border-right: 1px solid #2a2a4a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover {
+      background: #16213e;
+      color: #e0e0e0;
+    }
+    .sidebar a.active {
+      background: #16213e;
+      color: #a0a0ff;
+      border-right: 3px solid #a0a0ff;
+    }
+
+    /* Main content */
+    .main {
+      margin-left: 200px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1000px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .subtitle {
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .subtitle a { color: #a0a0ff; }
+
+    /* Emotion Card */
+    .emotion-card {
+      background: #16213e;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .emotion-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #a0a0ff;
+    }
+
+    .pair {
+      display: grid;
+      gap: 16px;
+    }
+    .pair.cols-1 { grid-template-columns: 1fr; max-width: 50%; }
+    .pair.cols-2 { grid-template-columns: 1fr 1fr; }
+    .pair.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .pair.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    @media (max-width: 900px) {
+      .pair.cols-3, .pair.cols-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+      .pair.cols-1, .pair.cols-2, .pair.cols-3, .pair.cols-4 { grid-template-columns: 1fr; max-width: 100%; }
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #16213e;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active {
+      background: #a0a0ff;
+      color: #1a1a2e;
+    }
+
+    .track-box {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .track-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .label-with { color: #6ee6a0; }
+    .label-without { color: #f0a060; }
+
+    .track-text {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .track-box audio {
+      width: 100%;
+    }
+
+    /* Now Playing */
+    .now-playing {
+      background: #16213e;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .now-playing h2 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      color: #a0a0ff;
+    }
+    .now-playing .empty {
+      color: #666;
+      font-style: italic;
+    }
+    .now-playing audio {
+      width: 100%;
+      max-width: 500px;
+      margin-top: 8px;
+    }
+    .now-playing .now-label {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+    .now-playing .now-text {
+      font-size: 1rem;
+      color: #e0e0e0;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h3>TTS Demo</h3>
+    <a href="index.html" class="active">Emotions</a>
+    <a href="cutoffs.html">Cut-offs</a>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Mobile nav -->
+    <div class="mobile-nav">
+      <a href="index.html" class="active">Emotions</a>
+      <a href="cutoffs.html">Cut-offs</a>
+    </div>
+
+    <h1>Emotion TTS Demo</h1>
+    <p class="subtitle">Compare speech generated with and without specific emotions</p>
+    <p class="subtitle">Emotions are selected from <a href="https://www.6seconds.org/2025/02/06/plutchik-wheel-emotions/" target="_blank">Plutchik's Wheel of Emotions</a></p>
+
+    <div class="note-box">
+      <strong>Note:</strong> I tested the eight emotions from Plutchik’s Wheel of Emotions using ElevenLabs emotion tags, mostly using emotion terms from the middle ring.
+
+      Overall, the tags worked well for most emotions. Adding “!” can also strengthen the emotional expression (e.g., see terror and admiration).
+      
+      However, some nuances were difficult to distinguish. For example, disgust and boredom were hard to differentiate, and admiration and trust were not very obvious unless strengthened with “!”.
+    </div>
+    
+    <!-- Now Playing -->
+    <div class="now-playing">
+      <h2>Now Playing</h2>
+      <div id="playerArea">
+        <p class="empty">Click any track below to play</p>
+      </div>
+    </div>
+
+    <!-- Tracks loaded here -->
+    <div id="trackList"></div>
+  </div>
+
+  <script>
+    let currentAudio = null;
+
+    async function init() {
+      try {
+        const res = await fetch("tracks.json");
+        const tracks = await res.json();
+        renderTracks(tracks);
+      } catch (err) {
+        document.getElementById("trackList").innerHTML =
+          '<p style="color: #ff6b6b;">Failed to load tracks.json</p>';
+        console.error(err);
+      }
+    }
+
+    function renderTracks(tracks) {
+      const list = document.getElementById("trackList");
+      list.innerHTML = tracks
+        .map((t) => {
+          const cols = Math.min(t.tracks.length, 4);
+          const boxes = t.tracks
+            .map((tr) => {
+              const isWithout = tr.label.toLowerCase().includes("without");
+              const labelClass = isWithout ? "label-without" : "label-with";
+              return `<div class="track-box">
+                <div class="track-label ${labelClass}">${esc(tr.label)}</div>
+                <div class="track-text">"${esc(tr.text)}"</div>
+                <audio controls src="${tr.file}"
+                  onplay="onPlay(this, '${esc(tr.label)}', \`${esc(tr.text)}\`)"></audio>
+              </div>`;
+            })
+            .join("");
+
+          return `
+            <div class="emotion-card">
+              <h2>${esc(t.emotion)}</h2>
+              ${t.note ? `<p style="color: #888; font-size: 0.85rem; margin-bottom: 12px;">Note: ${esc(t.note)}</p>` : ''}
+              <div class="pair cols-${cols}">
+                ${boxes}
+              </div>
+            </div>`;
+        })
+        .join("");
+    }
+
+    function onPlay(audioEl, label, text) {
+      document.querySelectorAll("audio").forEach((a) => {
+        if (a !== audioEl) a.pause();
+      });
+
+      const area = document.getElementById("playerArea");
+      area.innerHTML = `
+        <div class="now-label">${label}</div>
+        <div class="now-text">"${text}"</div>
+      `;
+    }
+
+    function esc(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    init();
+  </script>
+</body>
+</html>

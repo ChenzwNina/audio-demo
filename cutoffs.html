@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cut-offs - TTS Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      min-height: 100vh;
+      background: #0f1a30;
+      border-right: 1px solid #2a2a4a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 20px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover {
+      background: #16213e;
+      color: #e0e0e0;
+    }
+    .sidebar a.active {
+      background: #16213e;
+      color: #a0a0ff;
+      border-right: 3px solid #a0a0ff;
+    }
+
+    /* Main content */
+    .main {
+      margin-left: 200px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1000px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .subtitle {
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .subtitle a { color: #a0a0ff; }
+
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #16213e;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active {
+      background: #a0a0ff;
+      color: #1a1a2e;
+    }
+
+    /* Dialogue card */
+    .dialogue-card {
+      background: #16213e;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .dialogue-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #a0a0ff;
+    }
+    .dialogue-card audio {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    /* Transcript */
+    .transcript {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .transcript-line {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .transcript-line:last-child { margin-bottom: 0; }
+    .speaker {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+    .speaker-1 { color: #6ee6a0; }
+    .speaker-2 { color: #f0a060; }
+    .line-text { color: #ccc; }
+    .emotion-tag { color: #a0a0ff; font-style: italic; }
+    .stage-direction { color: #ff8080; font-style: italic; font-size: 0.85rem; }
+
+    /* Note */
+    .note-box {
+      background: #1a2a4a;
+      border-left: 3px solid #a0a0ff;
+      border-radius: 0 8px 8px 0;
+      padding: 16px;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+    }
+    .note-box strong {
+      color: #a0a0ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h3>TTS Demo</h3>
+    <a href="index.html">Emotions</a>
+    <a href="cutoffs.html" class="active">Cut-offs</a>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Mobile nav -->
+    <div class="mobile-nav">
+      <a href="index.html">Emotions</a>
+      <a href="cutoffs.html" class="active">Cut-offs</a>
+    </div>
+
+    <h1>Cut-offs</h1>
+    <p class="subtitle">Exploring interruptions and cut-offs in dialogue</p>
+
+    <!-- Dialogue -->
+    <div class="dialogue-card">
+      <h2>Dialogue Demo</h2>
+      <audio controls src="dialogue/dialogue.mp3"></audio>
+
+      <div class="transcript">
+        <div class="transcript-line">
+          <span class="speaker speaker-1">Person 1:</span>
+          <span class="line-text">Um... I think climate change is, like, becoming harder to ignore these days.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-1">Person 1:</span>
+          <span class="emotion-tag">[Concern]</span>
+          <span class="line-text">We're kind of seeing more extreme weather events, you know—</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-2">Person 2:</span>
+          <span class="stage-direction">[interrupting!]</span>
+          <span class="line-text">—like floods... Sorry go ahead—</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-1">Person 1:</span>
+          <span class="line-text">—and we should take actions!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="note-box">
+      <strong>Note:</strong> I used the text-to-dialogue feature in ElevenLabs in the current demo, which generates all transcript first and inputs as a block, so they are not taking turns. What we can also explore is taking turns, and deciding rules to manually control cut-off since now latency is almost 0.
+    </div>
+  </div>
+</body>
+</html>

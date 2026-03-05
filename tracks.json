@@ -1,0 +1,64 @@
+[
+  {
+    "emotion": "Joy / No Emotion Tag",
+    "tracks": [
+      { "label": "With Joy", "file": "audio/tts-joy.mp3", "text": "[Joy] I’m here to celebrate our achievement. Great job, everyone!" },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-joy.mp3", "text": "I’m here to celebrate our achievement. Great job, everyone!" }
+    ]
+  },
+  {
+    "emotion": "Anger / No Emotion Tag",
+    "tracks": [
+      { "label": "With Anger", "file": "audio/tts-anger.mp3", "text": "[Anger] This does not make any sense! I hate you all." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-anger.mp3", "text": "This does not make any sense! I hate you all." }
+    ]
+  },
+  {
+    "emotion": "Anticipation / No Emotion Tag",
+    "tracks": [
+      { "label": "With Anticipation", "file": "audio/tts-anticipation.mp3", "text": "[Anticipation] I think it’s going to work well this time. Fingers crossed." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-anticipation.mp3", "text": "I think it’s going to work well this time. Fingers crossed." }
+    ]
+  },
+  {
+    "emotion": "Terror / Fear / No Emotion Tag",
+    "tracks": [
+      { "label": "With Terror '!'", "file": "audio/tts-terror-2.mp3", "text": "[Terror] I don't know what to do!! This sounds really horrible." },
+      { "label": "With Terror", "file": "audio/tts-terror.mp3", "text": "[Terror] I don't know what to do. This sounds really horrible." },
+      { "label": "With Fear", "file": "audio/tts-fear.mp3", "text": "[Fear] I don't know what to do. This sounds really horrible." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-fear.mp3", "text": "I don't know what to do. This sounds really horrible." }
+    ]
+  },
+  {
+    "emotion": "Surprise / No Emotion Tag",
+    "tracks": [
+      { "label": "With Surprise", "file": "audio/tts-surprise.mp3", "text": "[Surprise] I did not know that. That’s new to me." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-surprise2.mp3", "text": "I did not know that. That’s new to me." }
+    ]
+  },
+  {
+    "emotion": "Sadness / No Emotion Tag",
+    "tracks": [
+      { "label": "With Sadness", "file": "audio/tts-sad.mp3", "text": "[Sad] Yeah… I mean, it’s honestly really discouraging to see how serious climate change has become." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-sad.mp3", "text": "Yeah… I mean, it’s honestly really discouraging to see how serious climate change has become." }
+    ]
+  },
+  {
+    "emotion": "Admiration / Trust / No Emotion Tag",
+    "note": "not so obvious",
+    "tracks": [
+      { "label": "With Admiration and '!'", "file": "audio/tts-admiration-2.mp3", "text": "[Admiration] I have faith in that!! And I think we’re moving in the right direction." },
+      { "label": "With Admiration", "file": "audio/tts-admiration.mp3", "text": "[Admiration] I have faith in that, and I think we’re moving in the right direction." },
+      { "label": "With Trust", "file": "audio/tts-trust.mp3", "text": "[Trust] I have faith in that, and I think we’re moving in the right direction." },
+      { "label": "Without Emotion Tag", "file": "audio/tts-without-trust.mp3", "text": "I have faith in that, and I think we’re moving in the right direction." }
+    ]
+  },
+  {
+    "emotion": "Disgust / Boredom / No Emotion Tag",
+    "tracks": [
+      { "label": "With Disgust", "file": "audio/tts-disgust.mp3", "text": "[Disgust] I feel like we’ve already talked about this so many times."},
+      { "label": "With Boredom", "file": "audio/tts-boredom.mp3", "text": "[Boredom] I feel like we’ve already talked about this so many times." },
+      { "label": "Without Emotion", "file": "audio/tts-without-disgust.mp3", "text": "I feel like we’ve already talked about this so many times." }
+    ]
+  }
+]
