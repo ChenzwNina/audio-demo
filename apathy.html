@@ -161,7 +161,33 @@
     .speaker-brian { color: #999999; }
     .speaker-harper { color: #b0b0b0; }
     .line-text { color: #ccc; }
-    .emotion-tag { color: #ffffff; font-style: italic; }
+    .emotion-tag { color: #a0a0a0; font-style: italic; }
+    .config-name {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      color: #b0b0b0;
+      font-size: 1.1rem;
+    }
+    .misbehavior-badge {
+      display: inline-block;
+      background: #3d2e1a;
+      color: #d4a574;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
+    .topic-label {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .topic-label strong {
+      color: #d4a574;
+    }
   </style>
 </head>
 <body>
@@ -176,8 +202,7 @@
     <span class="section-label">Persona Generation</span>
     <a href="persona-generation.html">Method</a>
     <span class="section-label">Emotion Testing</span>
-    <a href="persona-generation.html">Persona Gen</a>
-      <a href="index.html">Emotion</a>
+    <a href="index.html">Emotion</a>
     <a href="cutoffs.html">Cut-off</a>
   </nav>
 
@@ -188,8 +213,7 @@
       <a href="inattention.html">Inattention</a>
       <a href="apathy.html" class="active">Apathy</a>
       <a href="disrupting.html">Disrupting</a>
-      <a href="persona-generation.html">Persona Gen</a>
-      <a href="index.html">Emotion</a>
+    <a href="index.html">Emotion</a>
       <a href="cutoffs.html">Cut-off</a>
     </div>
 
@@ -205,11 +229,11 @@
     </div>
 
     <div class="card">
-      <h2>Persona of Agents</h2>
-      <p style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">Discussion topic: <strong style="color: #e0e0e0;">Should online platforms be held liable for user-generated content?</strong></p>
+      <h2><span class="config-name">config-apathy</span></h2>
+      <p class="topic-label">Discussion topic: <strong>Should online platforms be held liable for user-generated content?</strong></p>
 
       <div class="persona">
-        <div class="persona-name">Adam</div>
+        <div class="persona-name">Adam <span class="misbehavior-badge">Apathy</span></div>
         <div class="persona-meta">Participation bias: 0.33</div>
         <ul class="persona-experiences">
           <li>After posting about attending a chamber orchestra rehearsal, someone doxxed his home address and threatened him in the comments. The platform refused to remove those posts for three days, forcing him to change his phone number and file a police report.</li>
