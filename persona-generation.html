@@ -283,10 +283,12 @@
       <div class="method-card">
         <h2>LLM Direct</h2>
         <p>Use GPT to directly generate experiences related to the discussion topic. No grounding in character backgrounds — the model invents plausible-sounding but generic experiences from scratch.</p>
+        <p style="margin-top: 12px; color: #d4a574; font-size: 0.9rem;">Problem: LLM-direct produces homogeneous viewpoint stances and experiences across agents, resulting in discussions that lack genuine diversity of perspective.</p>
       </div>
 
       <div class="method-card">
         <h2>Grounded Generation <span class="used-badge">Used in demo</span></h2>
+        <p style="margin-bottom: 12px;">Solution: Force diverse viewpoints first, then use seeded personal backgrounds to generate relevant experiences that naturally shape each agent's stance.</p>
         <ol class="steps">
           <li>Randomly pick 3 background sentences from <code style="color: #fff;">personas.txt</code> per agent</li>
           <li>Generate 3 distinct views on the topic (forced diversity)</li>
