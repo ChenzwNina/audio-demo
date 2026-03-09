@@ -111,15 +111,57 @@
       border: 2px dashed #2a2a4a;
     }
 
+    /* Persona */
+    .persona {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .persona:last-child { margin-bottom: 0; }
+    .persona-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #a0a0ff;
+      margin-bottom: 8px;
+    }
+    .persona-meta {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .persona-experiences {
+      list-style: disc;
+      padding-left: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .persona-experiences li {
+      margin-bottom: 8px;
+    }
+
     /* Transcript */
     .transcript {
       background: #0f3460;
       border-radius: 8px;
       padding: 16px;
-      color: #aaa;
-      font-style: italic;
+    }
+    .transcript-line {
+      margin-bottom: 10px;
       line-height: 1.6;
     }
+    .transcript-line:last-child { margin-bottom: 0; }
+    .speaker {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+    .speaker-cici { color: #6ee6a0; }
+    .speaker-harper { color: #60b0f0; }
+    .speaker-cali { color: #f0a060; }
+    .line-text { color: #ccc; }
+    .emotion-tag { color: #a0a0ff; font-style: italic; }
   </style>
 </head>
 <body>
@@ -157,12 +199,75 @@
 
     <div class="card">
       <h2>Persona of Agents</h2>
-      <div class="video-placeholder">Persona details coming soon</div>
+      <p style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">Discussion topic: <strong style="color: #e0e0e0;">Is social media responsible for spreading misinformation?</strong></p>
+
+      <div class="persona">
+        <div class="persona-name">Cici</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>As a wedding planner, three couples canceled after a widely shared post falsely claimed their county had banned indoor receptions. She traced the post to an engagement-driven feed earning ad revenue from the outrage.</li>
+          <li>As a country music fan, watched a fabricated story about a popular singer trend for days until the singer posted a correction, yet the platform kept recommending similar conspiracy videos because they drew more engagement.</li>
+          <li>Every morning saw the same misleading political ad targeted at her town run repeatedly across different apps. She reported it, received an automated reply, and the ad continued to run.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Harper</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>Visited a WWII museum in Berlin and saw original propaganda leaflets and archived radio scripts that showed how organized falsehoods existed long before any online platform, convincing her technology isn't the root cause.</li>
+          <li>While traveling in Mexico City, watched a viral WhatsApp audio about contaminated street food spread through a crowded market until a local newspaper published lab tests debunking it, proving that charismatic rumors and lazy verification fuel harm more than the messaging app itself.</li>
+          <li>On hunting trips with her brothers, heard everyone confidently repeat the same unverified "sightings," a concrete example of how cognitive biases and poor media literacy amplify misinformation more than any single technology.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Cali</div>
+        <div class="persona-meta">Participation bias: 0.34</div>
+        <ul class="persona-experiences">
+          <li>Overheard neighbors arguing about a viral Facebook post that had already been debunked by national fact-checkers but still influenced a city council vote, convincing her platforms amplify falsehoods and that local officials and news outlets share responsibility.</li>
+          <li>Her parents modeled source-checking by sitting with her to trace a sensational forwarded message to its original blog and then calling the county health department to confirm the facts.</li>
+          <li>As a college student, worked on a campus research project that mapped how algorithmic boosts on Twitter increased misinformation about a vaccine study until campus administrators, local media, and the platform coordinated transparency measures.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="card">
       <h2>Transcript</h2>
-      <div class="transcript">Transcript coming soon</div>
+      <div class="transcript">
+        <div class="transcript-line">
+          <span class="speaker speaker-cici">Cici:</span>
+          <span class="emotion-tag">[interrupting]</span>
+          <span class="line-text">—Honestly, I think social media is a huge part of the problem! I mean, just last summer, a false post caused three couples to cancel their weddings with me, all because it went viral.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="emotion-tag">[Sympathetic]</span>
+          <span class="line-text">Wow, Cici, that's really frustrating! I've seen how misinformation can have real-life consequences, like when I overheard neighbors arguing over a viral Facebook post that influenced a city council vote... It really shows how powerful and harmful social media can be.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="emotion-tag">[Confident]</span>
+          <span class="line-text">I totally get where you're both coming from. But, you know, I'm not convinced social media is the main culprit. [pauses] In my experience, misinformation has been around long before technology. I remember visiting a WWII museum and seeing how organized propaganda influenced so many people. It's more about our tendency to believe and share without verifying. What do you think about that, Cici?</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cici">Cici:</span>
+          <span class="emotion-tag">[interrupting]</span>
+          <span class="line-text">—But, Harper, social media supercharges that tendency! It makes misinformation spread way faster, like when I saw a wild rumor about a country singer trending for days before they finally corrected it.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="line-text">I see your point, Cici, about social media speeding things up... Honestly, I think it amplifies misinformation in ways traditional media couldn't. It's like that campus research project I worked on — we saw how algorithmic boosts on Twitter magnified misinformation about vaccines! You can really feel the impact.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="line-text">I hear you, Cali, and I get that point about algorithms playing a role. But, here's the thing: it's still people who choose to share that misinformation. [pauses] During my time in Mexico City, I saw firsthand how charismatic rumors spread, even without social media. It's about a mix of human behavior and our media literacy, not just the platforms themselves.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="line-text">I totally understand that, Harper. It's true that people play a huge role in sharing what they see. But, I believe social media creates a unique environment where misinformation can thrive, like it did with the vaccine study at my campus. The combination of algorithms and human behavior just amplifies the issue even more... What do you think, Cici?</span>
+        </div>
+      </div>
     </div>
   </div>
 </body>

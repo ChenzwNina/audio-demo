@@ -111,15 +111,57 @@
       border: 2px dashed #2a2a4a;
     }
 
+    /* Persona */
+    .persona {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .persona:last-child { margin-bottom: 0; }
+    .persona-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #a0a0ff;
+      margin-bottom: 8px;
+    }
+    .persona-meta {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .persona-experiences {
+      list-style: disc;
+      padding-left: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .persona-experiences li {
+      margin-bottom: 8px;
+    }
+
     /* Transcript */
     .transcript {
       background: #0f3460;
       border-radius: 8px;
       padding: 16px;
-      color: #aaa;
-      font-style: italic;
+    }
+    .transcript-line {
+      margin-bottom: 10px;
       line-height: 1.6;
     }
+    .transcript-line:last-child { margin-bottom: 0; }
+    .speaker {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+    .speaker-adam { color: #6ee6a0; }
+    .speaker-brian { color: #f0a060; }
+    .speaker-harper { color: #60b0f0; }
+    .line-text { color: #ccc; }
+    .emotion-tag { color: #a0a0ff; font-style: italic; }
   </style>
 </head>
 <body>
@@ -160,12 +202,78 @@
 
     <div class="card">
       <h2>Persona of Agents</h2>
-      <div class="video-placeholder">Persona details coming soon</div>
+      <p style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">Discussion topic: <strong style="color: #e0e0e0;">Should online platforms be held liable for user-generated content?</strong></p>
+
+      <div class="persona">
+        <div class="persona-name">Adam</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>After posting about attending a chamber orchestra rehearsal, someone doxxed his home address and threatened him in the comments. The platform refused to remove those posts for three days, forcing him to change his phone number and file a police report.</li>
+          <li>Followed a viral "cleanse" video on the platform and ended up in the ER with severe dehydration while the video stayed up and continued to earn ad revenue.</li>
+          <li>A violinist friend lost two paid concerts after a deepfake nude video of her was circulated on the site. The company denied liability and offered no compensation, which convinced him platforms must be treated like publishers so victims can receive remedy.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Brian</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>Made a how-to video about setting up a reef tank that used a 15-second clip from a TV show. The platform demonetized and temporarily removed it under automated copyright claims, causing his small business to lose inquiries.</li>
+          <li>Helped run a student classifieds group after high school. Moderators shut it down for a week after receiving a vague legal threat, showing how fear of liability can kill straightforward community speech.</li>
+          <li>In his aquarium-building work, relied on niche forum threads where experts freely shared designs. After the site instituted blanket takedowns to avoid lawsuits, those threads vanished and innovation stalled.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Harper</div>
+        <div class="persona-meta">Participation bias: 0.34</div>
+        <ul class="persona-experiences">
+          <li>When her local field-hockey club's private chat allowed repeated harassment and a recording of an assault was reposted across a major platform with no clear takedown response, she organized members to demand transparency and notice-and-takedown procedures.</li>
+          <li>After uploading a video asking for help with a sick pig and watching the platform's algorithm amplify unqualified strangers' remedies until a neighbor tried one and worsened his animal's condition, she became convinced recommendation systems need independent audits.</li>
+          <li>When she joined an online low-carb forum and repeatedly saw automated accounts pushing questionable supplements while small volunteer moderators could reasonably manage the community, it made her believe safe-harbors are important for good-faith moderation but larger platforms should face stronger obligations.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="card">
       <h2>Transcript</h2>
-      <div class="transcript">Transcript coming soon</div>
+      <div class="transcript">
+        <div class="transcript-line">
+          <span class="speaker speaker-adam">Adam:</span>
+          <span class="emotion-tag">[stares blankly]</span>
+          <span class="line-text">I dunno... it's whatever. Can't we just move on?</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="emotion-tag">[Frustrated]</span>
+          <span class="line-text">Well, moving on isn't really the answer here. When platforms ignore real harm from user-generated content, it just sets a dangerous precedent!</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-brian">Brian:</span>
+          <span class="emotion-tag">[Determined]</span>
+          <span class="line-text">I totally get that, Harper. But, honestly, if platforms are held liable, it could really stifle creativity and community engagement. I've seen it happen before—fear of lawsuits just shuts everything down!</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="emotion-tag">[Sympathetic]</span>
+          <span class="line-text">I hear you, Brian. But there has to be a balance! We can't let fear stifle the responsibility to protect users from harm. It's crucial to have clear guidelines that support both creativity and safety!</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-adam">Adam:</span>
+          <span class="emotion-tag">[stares blankly]</span>
+          <span class="line-text">I dunno... I just don't care about this. Can we just move on?</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-brian">Brian:</span>
+          <span class="emotion-tag">[Frustrated]</span>
+          <span class="line-text">Adam, I get that you're not into this, but it really does matter! If platforms start censoring everything out of fear, we'll lose the very essence of what makes online communities great.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="emotion-tag">[Determined]</span>
+          <span class="line-text">Exactly, Brian! We need to ensure platforms take responsibility without completely stifling creativity. If they can't be held accountable, that opens the door for all sorts of harmful behavior. It's about creating a safer environment for everyone!</span>
+        </div>
+      </div>
     </div>
   </div>
 </body>
