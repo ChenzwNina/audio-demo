@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persona Generation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #141414;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0a0a0a;
+      border-right: 1px solid #2a2a2a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar .section-label {
+      display: block;
+      padding: 8px 20px;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+    }
+    .sidebar .section-label:first-of-type { margin-top: 0; }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px 8px 32px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover { background: #1c1c1c; color: #e0e0e0; }
+    .sidebar a.active { background: #1c1c1c; color: #ffffff; border-right: 3px solid #ffffff; }
+
+    /* Main content */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1000px;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: #888; margin-bottom: 20px; }
+
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #1c1c1c;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active { background: #ffffff; color: #141414; }
+
+    /* Card */
+    .card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      color: #ccc;
+    }
+    .card p {
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* Steps */
+    .steps {
+      list-style: none;
+      counter-reset: step;
+    }
+    .steps li {
+      counter-increment: step;
+      padding: 16px;
+      background: #262626;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      line-height: 1.6;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+    .steps li::before {
+      content: counter(step) ". ";
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 800px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+    .comparison-col {
+      background: #262626;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .comparison-col h3 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      color: #999;
+    }
+
+    /* Persona in comparison */
+    .persona-block {
+      margin-bottom: 16px;
+    }
+    .persona-block:last-child { margin-bottom: 0; }
+    .persona-block .name {
+      font-weight: 700;
+      color: #e0e0e0;
+      margin-bottom: 6px;
+    }
+    .persona-block ul {
+      list-style: disc;
+      padding-left: 20px;
+      color: #aaa;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .persona-block li {
+      margin-bottom: 6px;
+    }
+
+    /* Topic label */
+    .topic-label {
+      display: inline-block;
+      background: #333;
+      color: #ccc;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h3>TTS Demo</h3>
+    <span class="section-label">Disruptive Behavior</span>
+    <a href="taxonomy.html">Taxonomy</a>
+    <a href="inattention.html">Inattention Demo</a>
+    <a href="apathy.html">Apathy Demo</a>
+    <a href="disrupting.html">Disrupting Demo</a>
+    <span class="section-label">Persona Generation</span>
+    <a href="persona-generation.html" class="active">Method</a>
+    <span class="section-label">Emotion Testing</span>
+    <a href="index.html">Emotion</a>
+    <a href="cutoffs.html">Cut-off</a>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="mobile-nav">
+      <a href="taxonomy.html">Taxonomy</a>
+      <a href="inattention.html">Inattention</a>
+      <a href="apathy.html">Apathy</a>
+      <a href="disrupting.html">Disrupting</a>
+      <a href="persona-generation.html" class="active">Persona Gen</a>
+      <a href="index.html">Emotion</a>
+      <a href="cutoffs.html">Cut-off</a>
+    </div>
+
+    <h1>Persona Generation</h1>
+    <p class="subtitle">How we generate diverse, grounded agent personas for discussion simulations</p>
+
+    <!-- Method -->
+    <div class="card">
+      <h2>New Method</h2>
+      <ol class="steps">
+        <li>Randomly pick 3 background sentences from <code style="color: #fff;">personas.txt</code> per agent</li>
+        <li>Generate 3 distinct views on the topic (forced diversity)</li>
+        <li>Assign one view per agent</li>
+        <li>Generate 3 experiences grounded in both the assigned view and background</li>
+      </ol>
+    </div>
+
+    <!-- Topic 1 -->
+    <div class="card">
+      <h2>Topic 1: Should there be more regulation on AI ethics and accountability?</h2>
+
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>Old Method (LLM direct)</h3>
+          <div class="persona-block">
+            <div class="name">Cassidy</div>
+            <ul>
+              <li>I once worked on a machine learning hiring tool and watched qualified candidates get filtered out because the training data reflected past biases.</li>
+              <li>I testified at a city council meeting after a local police department deployed facial recognition without oversight and neighbors reported wrongful stops.</li>
+              <li>I inherited a legacy AI system at my company with no documentation; when it made risky medical recommendations there was no clear person responsible for fixing it.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Manav</div>
+            <ul>
+              <li>I watched an automated hiring tool systematically reject qualified applicants from certain neighborhoods and raised the issue with my team.</li>
+              <li>I testified at a city council meeting after residents complained about a newly installed facial recognition camera on public buses.</li>
+              <li>I worked on an AI project where engineers dismissed clear bias in the training data because leadership pushed for a fast launch.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Ellen</div>
+            <ul>
+              <li>I sat on a hiring panel where an AI resume screener repeatedly downgraded qualified candidates from certain universities, and we had no transparency into why.</li>
+              <li>I attended an industry conference where ethicists warned that without clearer legal accountability companies would treat AI failures as acceptable losses.</li>
+              <li>I worked on a customer-facing chatbot that began offering incorrect financial advice, and my team discovered there was no secure process to report or fix such harms.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comparison-col">
+          <h3>New Method (grounded)</h3>
+          <div class="persona-block">
+            <div class="name">Cici</div>
+            <ul>
+              <li>Baked dozens of cupcakes for a school fundraiser and watched as the event's automated labeling app misidentified ingredients, sending a classmate with a severe nut allergy to the nurse, convincing her that companies running such systems should face strict liability.</li>
+              <li>Her father used to work for Microsoft and showed her an internal case study where a content-moderation model systematically suppressed posts from a political minority without explanation, convincing her that government-enforced transparency and independent audits are necessary.</li>
+              <li>Draws all her friends as My Little Pony characters and later learned that an advertising firm had scraped those images to build detailed profiles used to micro-target voters in their town's election.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Harper</div>
+            <ul>
+              <li>When the city started enforcing new vending regulations at the food-truck park where she gets takeout every Friday, three of her favorite vendors shut down because they couldn't afford compliance costs, convincing her heavy regulation can smother small innovators.</li>
+              <li>Worked briefly with a delivery startup building an AI recommendation feature for takeout orders. After regulators introduced prescriptive audit requirements, the team shelved the feature because the compliance burden outstripped their budget.</li>
+              <li>While planning a trip to the UK, spoke with several British founders who said that markets and reputational pressure, rather than stiff centralized rules, allowed them to iterate responsibly across borders.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Cali</div>
+            <ul>
+              <li>Watched her father, a retired police officer, argue with supervisors after a predictive-policing algorithm repeatedly flagged his patrol beats incorrectly, convincing her high-risk uses like criminal justice need strict rules and clear liability.</li>
+              <li>When an airline's automated scheduling and passport-checking system misread her booking and almost left her stranded on a layover, she realized systems affecting travel and critical infrastructure require standardized testing and international coordination.</li>
+              <li>After uploading a Justin Bieber playlist and watching harmless personalization algorithms amplify it with no apparent harm, she became comfortable with lighter oversight for low-risk applications while still supporting tougher rules where the stakes are higher.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="card">
+      <h2>Topic 2: Should online platforms be held liable for user-generated content?</h2>
+
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>Old Method (LLM direct)</h3>
+          <div class="persona-block">
+            <div class="name">Drew</div>
+            <ul>
+              <li>I once had my investigative article taken down by a social media site after a user accused me of defamation, and I watched the platform refuse to mediate the dispute.</li>
+              <li>I testified at a local town hall where victims of harassment described how a popular forum hosted threatening posts for months without moderation.</li>
+              <li>As a small business owner, I lost customers after a series of fake reviews spread across multiple apps, and the platforms declined to remove them despite repeated reports.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Zara</div>
+            <ul>
+              <li>I had my small online shop suspended after a rival posted false reviews on a social platform and the company refused to accept my appeals.</li>
+              <li>I attended a city council forum where survivors of coordinated harassment explained how platform negligence allowed abusers to continue targeting them.</li>
+              <li>During law school I researched cases where courts wrestled with whether platforms could be treated as publishers for user posts.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Jarnatham</div>
+            <ul>
+              <li>I once watched a friend's small business collapse after a barrage of false user reviews went unchecked on a major platform.</li>
+              <li>I experienced my own blog post being taken down without clear explanation while abuse-filled threads that targeted others remained visible.</li>
+              <li>I heard from an acquaintance who was doxxed through user-generated comments and felt the platform's slow response made the situation worse.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comparison-col">
+          <h3>New Method (grounded)</h3>
+          <div class="persona-block">
+            <div class="name">Adam</div>
+            <ul>
+              <li>After posting about attending a chamber orchestra rehearsal, someone doxxed his home address and threatened him in the comments. The platform refused to remove those posts for three days, forcing him to change his phone number and file a police report.</li>
+              <li>Followed a viral "cleanse" video on the platform and ended up in the ER with severe dehydration while the video stayed up and continued to earn ad revenue.</li>
+              <li>A violinist friend lost two paid concerts after a deepfake nude video of her was circulated on the site. The company denied liability and offered no compensation, which convinced him platforms must be treated like publishers so victims can receive remedy.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Brian</div>
+            <ul>
+              <li>Made a how-to video about setting up a reef tank that used a 15-second clip from a TV show. The platform demonetized and temporarily removed it under automated copyright claims, causing his small business to lose inquiries.</li>
+              <li>Helped run a student classifieds group after high school. Moderators shut it down for a week after receiving a vague legal threat, showing how fear of liability can kill straightforward community speech.</li>
+              <li>In his aquarium-building work, relied on niche forum threads where experts freely shared designs. After the site instituted blanket takedowns to avoid lawsuits, those threads vanished and innovation stalled.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Harper</div>
+            <ul>
+              <li>When her local field-hockey club's private chat allowed repeated harassment and a recording of an assault was reposted across a major platform with no clear takedown response, she organized members to demand transparency and notice-and-takedown procedures.</li>
+              <li>After uploading a video asking for help with a sick pig and watching the platform's algorithm amplify unqualified strangers' remedies until a neighbor tried one and worsened his animal's condition, she became convinced recommendation systems need independent audits.</li>
+              <li>When she joined an online low-carb forum and repeatedly saw automated accounts pushing questionable supplements while small volunteer moderators could reasonably manage the community, it made her believe safe-harbors are important for good-faith moderation but larger platforms should face stronger obligations.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="card">
+      <h2>Topic 3: Is social media responsible for spreading misinformation?</h2>
+
+      <div class="comparison">
+        <div class="comparison-col">
+          <h3>Old Method (LLM direct)</h3>
+          <div class="persona-block">
+            <div class="name">Siren</div>
+            <ul>
+              <li>I watched a baseless rumor about a local election spread across my feed within hours after it was posted.</li>
+              <li>I noticed friends and family sharing sensational articles without verifying them, which led to heated arguments in my group chat.</li>
+              <li>I once posted a fact-check to a widely shared health claim and my correction received far fewer views than the original post.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Mark</div>
+            <ul>
+              <li>I watched a viral post spread a false health claim and saw friends share it without checking the source.</li>
+              <li>I once caught myself resharing an alarming headline before realizing it was debunked by credible news outlets.</li>
+              <li>I have heard acquaintances insist on conspiracy theories they found on social platforms despite contradicting evidence.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Nate</div>
+            <ul>
+              <li>I have watched a false rumor about a local event spiral across my feed in a matter of hours and noticed how quickly people shared it without checking sources.</li>
+              <li>I've seen health-related misinformation get thousands of likes and comments before any authoritative correction appeared, which made me question the platforms' role in amplification.</li>
+              <li>I once had a family member change their plans after reading a persuasive but unfounded post, and I felt social media had contributed to that decision.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comparison-col">
+          <h3>New Method (grounded)</h3>
+          <div class="persona-block">
+            <div class="name">Cici</div>
+            <ul>
+              <li>As a wedding planner, three couples canceled after a widely shared post falsely claimed their county had banned indoor receptions. She traced the post to an engagement-driven feed earning ad revenue from the outrage.</li>
+              <li>As a country music fan, watched a fabricated story about a popular singer trend for days until the singer posted a correction, yet the platform kept recommending similar conspiracy videos because they drew more engagement.</li>
+              <li>Every morning saw the same misleading political ad targeted at her town run repeatedly across different apps. She reported it, received an automated reply, and the ad continued to run.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Harper</div>
+            <ul>
+              <li>Visited a WWII museum in Berlin and saw original propaganda leaflets and archived radio scripts that showed how organized falsehoods existed long before any online platform, convincing her technology isn't the root cause.</li>
+              <li>While traveling in Mexico City, watched a viral WhatsApp audio about contaminated street food spread through a crowded market until a local newspaper published lab tests debunking it, proving that charismatic rumors and lazy verification fuel harm more than the messaging app itself.</li>
+              <li>On hunting trips with her brothers, heard everyone confidently repeat the same unverified "sightings," a concrete example of how cognitive biases and poor media literacy amplify misinformation more than any single technology.</li>
+            </ul>
+          </div>
+          <div class="persona-block">
+            <div class="name">Cali</div>
+            <ul>
+              <li>Overheard neighbors arguing about a viral Facebook post that had already been debunked by national fact-checkers but still influenced a city council vote, convincing her platforms amplify falsehoods and that local officials and news outlets share responsibility.</li>
+              <li>Her parents modeled source-checking by sitting with her to trace a sensational forwarded message to its original blog and then calling the county health department to confirm the facts.</li>
+              <li>As a college student, worked on a campus research project that mapped how algorithmic boosts on Twitter increased misinformation about a vaccine study until campus administrators, local media, and the platform coordinated transparency measures.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
