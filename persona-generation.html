@@ -213,16 +213,21 @@
       <a href="apathy.html">Apathy</a>
       <a href="disrupting.html">Disrupting</a>
       <a href="persona-generation.html" class="active">Persona Gen</a>
-      <a href="index.html">Emotion</a>
+    <a href="index.html">Emotion</a>
       <a href="cutoffs.html">Cut-off</a>
     </div>
 
     <h1>Persona Generation</h1>
     <p class="subtitle">How we generate diverse, grounded agent personas for discussion simulations</p>
 
-    <!-- Method -->
+    <!-- Methods -->
     <div class="card">
-      <h2>New Method</h2>
+      <h2>LLM Direct</h2>
+      <p>Use GPT to directly generate experiences related to the discussion topic. No grounding in character backgrounds — the model invents plausible-sounding but generic experiences from scratch.</p>
+    </div>
+
+    <div class="card">
+      <h2>Grounded Generation</h2>
       <ol class="steps">
         <li>Randomly pick 3 background sentences from <code style="color: #fff;">personas.txt</code> per agent</li>
         <li>Generate 3 distinct views on the topic (forced diversity)</li>
@@ -265,7 +270,7 @@
         </div>
 
         <div class="comparison-col">
-          <h3>New Method (grounded)</h3>
+          <h3>Grounded Generation</h3>
           <div class="persona-block">
             <div class="name">Cici</div>
             <ul>
@@ -328,7 +333,7 @@
         </div>
 
         <div class="comparison-col">
-          <h3>New Method (grounded)</h3>
+          <h3>Grounded Generation</h3>
           <div class="persona-block">
             <div class="name">Adam</div>
             <ul>
@@ -391,7 +396,7 @@
         </div>
 
         <div class="comparison-col">
-          <h3>New Method (grounded)</h3>
+          <h3>Grounded Generation</h3>
           <div class="persona-block">
             <div class="name">Cici</div>
             <ul>
