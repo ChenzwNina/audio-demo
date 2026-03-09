@@ -187,6 +187,64 @@
       border-radius: 4px;
       margin-bottom: 16px;
     }
+
+    /* Methods side-by-side */
+    .methods-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 800px) {
+      .methods-row { grid-template-columns: 1fr; }
+    }
+    .method-card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .method-card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+    .method-card p {
+      color: #aaa;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .method-card .steps {
+      list-style: none;
+      counter-reset: step;
+    }
+    .method-card .steps li {
+      counter-increment: step;
+      padding: 12px;
+      background: #262626;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      line-height: 1.6;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    .method-card .steps li::before {
+      content: counter(step) ". ";
+      font-weight: 700;
+      color: #fff;
+    }
+    .used-badge {
+      display: inline-block;
+      background: #1a3d2e;
+      color: #74d4a5;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -221,19 +279,21 @@
     <p class="subtitle">How we generate diverse, grounded agent personas for discussion simulations</p>
 
     <!-- Methods -->
-    <div class="card">
-      <h2>LLM Direct</h2>
-      <p>Use GPT to directly generate experiences related to the discussion topic. No grounding in character backgrounds — the model invents plausible-sounding but generic experiences from scratch.</p>
-    </div>
+    <div class="methods-row">
+      <div class="method-card">
+        <h2>LLM Direct</h2>
+        <p>Use GPT to directly generate experiences related to the discussion topic. No grounding in character backgrounds — the model invents plausible-sounding but generic experiences from scratch.</p>
+      </div>
 
-    <div class="card">
-      <h2>Grounded Generation</h2>
-      <ol class="steps">
-        <li>Randomly pick 3 background sentences from <code style="color: #fff;">personas.txt</code> per agent</li>
-        <li>Generate 3 distinct views on the topic (forced diversity)</li>
-        <li>Assign one view per agent</li>
-        <li>Generate 3 experiences grounded in both the assigned view and background</li>
-      </ol>
+      <div class="method-card">
+        <h2>Grounded Generation <span class="used-badge">Used in demo</span></h2>
+        <ol class="steps">
+          <li>Randomly pick 3 background sentences from <code style="color: #fff;">personas.txt</code> per agent</li>
+          <li>Generate 3 distinct views on the topic (forced diversity)</li>
+          <li>Assign one view per agent</li>
+          <li>Generate 3 experiences grounded in both the assigned view and background</li>
+        </ol>
+      </div>
     </div>
 
     <!-- Topic 1 -->
