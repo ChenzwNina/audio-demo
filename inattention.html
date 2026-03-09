@@ -110,6 +110,58 @@
       font-size: 0.95rem;
       border: 2px dashed #2a2a4a;
     }
+
+    /* Persona */
+    .persona {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .persona:last-child { margin-bottom: 0; }
+    .persona-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #a0a0ff;
+      margin-bottom: 8px;
+    }
+    .persona-meta {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 12px;
+    }
+    .persona-experiences {
+      list-style: disc;
+      padding-left: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .persona-experiences li {
+      margin-bottom: 8px;
+    }
+
+    /* Transcript */
+    .transcript {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .transcript-line {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .transcript-line:last-child { margin-bottom: 0; }
+    .speaker {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+    .speaker-cici { color: #6ee6a0; }
+    .speaker-harper { color: #60b0f0; }
+    .speaker-cali { color: #f0a060; }
+    .line-text { color: #ccc; }
+    .emotion-tag { color: #a0a0ff; font-style: italic; }
   </style>
 </head>
 <body>
@@ -146,6 +198,81 @@
         <source src="video/Inattention.mov" type="video/quicktime" />
         Your browser does not support the video tag.
       </video>
+    </div>
+
+    <div class="card">
+      <h2>Persona of Agents</h2>
+      <p style="color: #888; font-size: 0.9rem; margin-bottom: 16px;">Discussion topic: <strong style="color: #e0e0e0;">Should there be more regulation on AI ethics and accountability?</strong></p>
+
+      <div class="persona">
+        <div class="persona-name">Cici</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>Baked dozens of cupcakes for a school fundraiser and watched as the event's automated labeling app misidentified ingredients, sending a classmate with a severe nut allergy to the nurse, convincing her that companies running such systems should face strict liability.</li>
+          <li>Her father used to work for Microsoft and showed her an internal case study where a content-moderation model systematically suppressed posts from a political minority without explanation, convincing her that government-enforced transparency and independent audits are necessary.</li>
+          <li>Draws all her friends as My Little Pony characters and later learned that an advertising firm had scraped those images to build detailed profiles used to micro-target voters in their town's election.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Harper</div>
+        <div class="persona-meta">Participation bias: 0.33</div>
+        <ul class="persona-experiences">
+          <li>When the city started enforcing new vending regulations at the food-truck park where she gets takeout every Friday, three of her favorite vendors shut down because they couldn't afford compliance costs, convincing her heavy regulation can smother small innovators.</li>
+          <li>Worked briefly with a delivery startup building an AI recommendation feature for takeout orders. After regulators introduced prescriptive audit requirements, the team shelved the feature because the compliance burden outstripped their budget.</li>
+          <li>While planning a trip to the UK, spoke with several British founders who said that markets and reputational pressure, rather than stiff centralized rules, allowed them to iterate responsibly across borders.</li>
+        </ul>
+      </div>
+
+      <div class="persona">
+        <div class="persona-name">Cali</div>
+        <div class="persona-meta">Participation bias: 0.34</div>
+        <ul class="persona-experiences">
+          <li>Watched her father, a retired police officer, argue with supervisors after a predictive-policing algorithm repeatedly flagged his patrol beats incorrectly, convincing her high-risk uses like criminal justice need strict rules and clear liability.</li>
+          <li>When an airline's automated scheduling and passport-checking system misread her booking and almost left her stranded on a layover, she realized systems affecting travel and critical infrastructure require standardized testing and international coordination.</li>
+          <li>After uploading a Justin Bieber playlist and watching harmless personalization algorithms amplify it with no apparent harm, she became comfortable with lighter oversight for low-risk applications while still supporting tougher rules where the stakes are higher.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Transcript</h2>
+      <div class="transcript">
+        <div class="transcript-line">
+          <span class="speaker speaker-cici">Cici:</span>
+          <span class="emotion-tag">[Yawns]</span>
+          <span class="line-text">Um, yeah... I guess more regulation could be helpful, but honestly... I'm kinda distracted right now. [pauses] Did someone mention cupcakes?</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="emotion-tag">[Amused]</span>
+          <span class="line-text">Cupcakes do sound tempting... but back to the topic! I think, especially in high-stakes areas like criminal justice, regulation is definitely needed to ensure accountability and prevent harm.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="line-text">I see your point, Cali. But here's the thing — heavy regulation can sometimes stifle innovation, like when I saw my favorite food trucks shut down due to compliance costs. [Pauses] It's a tough balance to strike.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="emotion-tag">[Confident]</span>
+          <span class="line-text">I get what you're saying, Harper. But with AI affecting lives so directly in critical areas, we can't really afford to put innovation ahead of safety. There needs to be a framework that balances both.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cici">Cici:</span>
+          <span class="emotion-tag">[Inattentive]</span>
+          <span class="line-text">Uh, yeah... I mean, regulation is important and all, but... wait, did someone bring up cupcakes again? [pauses] I can't stop thinking about frosting right now.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-harper">Harper:</span>
+          <span class="emotion-tag">[Frustrated]</span>
+          <span class="line-text">I totally get that safety is crucial, Cali. But, we really have to consider how strict regulations could slow progress. Like, when we tried to implement that AI recommendation feature for takeout, the compliance burden just killed the idea! [Pauses] We need a way to encourage innovation while still being responsible.</span>
+        </div>
+        <div class="transcript-line">
+          <span class="speaker speaker-cali">Cali:</span>
+          <span class="emotion-tag">[Determined]</span>
+          <span class="line-text">I understand, Harper, but without regulations, we risk creating systems that cause more harm than good. Look at the misfires in predictive policing! We need accountability to protect people, especially when it's life and death.</span>
+        </div>
+      </div>
     </div>
   </div>
 </body>
