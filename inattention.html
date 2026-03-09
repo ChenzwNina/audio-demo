@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inattention Demo - Disruptive Behavior</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0f1a30;
+      border-right: 1px solid #2a2a4a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar .section-label {
+      display: block;
+      padding: 8px 20px;
+      color: #a0a0ff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+    }
+    .sidebar .section-label:first-of-type { margin-top: 0; }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px 8px 32px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover { background: #16213e; color: #e0e0e0; }
+    .sidebar a.active { background: #16213e; color: #a0a0ff; border-right: 3px solid #a0a0ff; }
+
+    /* Main content */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1000px;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: #888; margin-bottom: 20px; }
+
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #16213e;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active { background: #a0a0ff; color: #1a1a2e; }
+
+    /* Card */
+    .card {
+      background: #16213e;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #a0a0ff;
+    }
+
+    /* Video placeholder */
+    .video-placeholder {
+      background: #0f3460;
+      border-radius: 8px;
+      padding: 60px 24px;
+      text-align: center;
+      color: #666;
+      font-size: 0.95rem;
+      border: 2px dashed #2a2a4a;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h3>TTS Demo</h3>
+    <span class="section-label">Disruptive Behavior</span>
+    <a href="taxonomy.html">Taxonomy</a>
+    <a href="inattention.html" class="active">Inattention Demo</a>
+    <a href="apathy.html">Apathy Demo</a>
+    <a href="disrupting.html">Disrupting Demo</a>
+    <span class="section-label">Emotion Testing</span>
+    <a href="index.html">Emotion</a>
+    <a href="cutoffs.html">Cut-off</a>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="mobile-nav">
+      <a href="taxonomy.html">Taxonomy</a>
+      <a href="inattention.html" class="active">Inattention</a>
+      <a href="apathy.html">Apathy</a>
+      <a href="disrupting.html">Disrupting</a>
+      <a href="index.html">Emotion</a>
+      <a href="cutoffs.html">Cut-off</a>
+    </div>
+
+    <h1>Inattention Demo</h1>
+    <p class="subtitle">Daydreaming, doodling, looking out the window, thinking about things irrelevant to the lesson.</p>
+
+    <div class="card">
+      <h2>Video</h2>
+      <video controls width="100%" style="border-radius: 8px;">
+        <source src="video/Inattention.mov" type="video/quicktime" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</body>
+</html>

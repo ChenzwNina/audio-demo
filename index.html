@@ -31,7 +31,7 @@
 
     /* Sidebar */
     .sidebar {
-      width: 200px;
+      width: 240px;
       min-height: 100vh;
       background: #0f1a30;
       border-right: 1px solid #2a2a4a;
@@ -39,6 +39,7 @@
       position: fixed;
       top: 0;
       left: 0;
+      overflow-y: auto;
     }
     .sidebar h3 {
       color: #fff;
@@ -46,12 +47,23 @@
       padding: 0 20px;
       margin-bottom: 24px;
     }
+    .sidebar .section-label {
+      display: block;
+      padding: 8px 20px;
+      color: #a0a0ff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+    }
+    .sidebar .section-label:first-of-type { margin-top: 0; }
     .sidebar a {
       display: block;
-      padding: 10px 20px;
+      padding: 8px 20px 8px 32px;
       color: #888;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       transition: background 0.2s, color 0.2s;
     }
     .sidebar a:hover {
@@ -66,7 +78,7 @@
 
     /* Main content */
     .main {
-      margin-left: 200px;
+      margin-left: 240px;
       flex: 1;
       padding: 40px;
       max-width: 1000px;
@@ -199,16 +211,26 @@
   <!-- Sidebar -->
   <nav class="sidebar">
     <h3>TTS Demo</h3>
-    <a href="index.html" class="active">Emotions</a>
-    <a href="cutoffs.html">Cut-offs</a>
+    <span class="section-label">Disruptive Behavior</span>
+    <a href="taxonomy.html">Taxonomy</a>
+    <a href="inattention.html">Inattention Demo</a>
+    <a href="apathy.html">Apathy Demo</a>
+    <a href="disrupting.html">Disrupting Demo</a>
+    <span class="section-label">Emotion Testing</span>
+    <a href="index.html" class="active">Emotion</a>
+    <a href="cutoffs.html">Cut-off</a>
   </nav>
 
   <!-- Main -->
   <div class="main">
     <!-- Mobile nav -->
     <div class="mobile-nav">
-      <a href="index.html" class="active">Emotions</a>
-      <a href="cutoffs.html">Cut-offs</a>
+      <a href="taxonomy.html">Taxonomy</a>
+      <a href="inattention.html">Inattention</a>
+      <a href="apathy.html">Apathy</a>
+      <a href="disrupting.html">Disrupting</a>
+      <a href="index.html" class="active">Emotion</a>
+      <a href="cutoffs.html">Cut-off</a>
     </div>
 
     <h1>Emotion TTS Demo</h1>
