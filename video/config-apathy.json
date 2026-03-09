@@ -1,0 +1,73 @@
+{
+  "topic": "Should online platforms be held liable for user-generated content?",
+  "disruptive_agent": "Adam",
+  "disruptive_behavior": "Apathy. A disinclination to participate, sulking, not caring, fearful of trying, not concerned about doing well",
+  "behavior_frequency": 1,
+  "biases": {
+    "Adam": 0.33,
+    "Brian": 0.33,
+    "Harper": 0.34
+  },
+  "experiences": {
+    "Adam": [
+      "After I posted about attending a chamber orchestra rehearsal, someone doxxed my home address and threatened me in the comments and the platform refused to remove those posts for three days, forcing me to change my phone number and file a police report.",
+      "Because I don't eat healthy, I followed a viral 'cleanse' video on the platform and ended up in the ER with severe dehydration while the video stayed up and continued to earn ad revenue.",
+      "A violinist friend lost two paid concerts after a deepfake nude video of her was circulated on the site and the company denied liability and offered no compensation, which convinced me platforms must be treated like publishers so victims can receive remedy."
+    ],
+    "Brian": [
+      "I made a how-to video about setting up a reef tank that used a 15-second clip from a TV show I love as a joke, and when the platform demonetized and temporarily removed it under automated copyright claims I watched my small business lose inquiries and learned how rigid enforcement can silence small creators.",
+      "Right after I graduated high school I helped run a student classifieds group, and when moderators shut it down for a week after receiving a vague legal threat I saw firsthand how fear of liability can kill straightforward community speech.",
+      "In my aquarium-building work I relied on niche forum threads where experts freely shared designs, but after the site instituted blanket takedowns to avoid lawsuits those threads vanished and innovation in our hobby stalled, convincing me platforms need broad immunity and flexible moderation rather than strict liability."
+    ],
+    "Harper": [
+      "When my local field-hockey club's private chat allowed repeated harassment and a recording of an assault was reposted across a major platform with no clear takedown response, I organized members to demand transparency and notice-and-takedown procedures because the harm was real and the platform's reach made a difference.",
+      "After I uploaded a video asking for help with a sick pig and watched the platform's algorithm amplify unqualified strangers' remedies until a neighbor tried one and worsened his animal's condition, I became convinced recommendation systems need independent audits and that platforms must have a duty of care proportional to their control.",
+      "When I joined an online low-carb forum to get recipe tips and repeatedly saw automated accounts pushing questionable supplements while the small volunteer moderators could reasonably manage the community, it made me believe safe-harbors are important for good-faith moderation but larger platforms should face stronger obligations because they amplify bad actors."
+    ]
+  },
+  "agents": [
+    "Adam",
+    "Brian",
+    "Harper"
+  ],
+  "personas": {
+    "Adam": {
+      "name": "Adam",
+      "voice_id": "xKhbyU7E3bC6T89Kn26c",
+      "participation_bias": 0.33
+    },
+    "Brian": {
+      "name": "Brian",
+      "voice_id": "bKrvJaCHEqucAEpSzACi",
+      "participation_bias": 0.33
+    },
+    "Harper": {
+      "name": "Harper",
+      "voice_id": "QLAlOeRuLwKX0skeTR7R",
+      "participation_bias": 0.34
+    }
+  },
+  "views": {
+    "Adam": "A public-safety and victims'-rights advocate argues platforms should be held liable for user-generated content-treated like publishers-so companies are incentivized to remove illegal and harmful material and compensate those harmed.",
+    "Brian": "A free-speech and tech-industry defender contends strict liability would chill expression and innovation, so platforms need broad immunity and flexible moderation discretion to host diverse speech without crippling legal risk.",
+    "Harper": "A pragmatic policymaker or consumer-rights proponent favors conditional liability: platforms should have a duty of care with proportional obligations (transparency, notice-and-takedown, independent audits) while preserving safe-harbors for good-faith moderation, scaled by platform size and control."
+  },
+  "backgrounds": {
+    "Adam": [
+      "i hate fast food .",
+      "i don't eat healthy .",
+      "i like classical music ."
+    ],
+    "Brian": [
+      "i just graduated from high school .",
+      "i like to watch tv .",
+      "i build aquariums for a living ."
+    ],
+    "Harper": [
+      "i like field hockey and soccer .",
+      "i have a farm with pigs , horses and hens .",
+      "i am on a low carb diet ."
+    ]
+  },
+  "behavior_description": "When the team debates whether online platforms should be held liable for user-generated content, I slump in my chair, avoid eye contact, and either mutter \"whatever\" or stay silent when someone asks for my opinion."
+}

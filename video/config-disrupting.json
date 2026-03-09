@@ -1,0 +1,74 @@
+{
+  "topic": "Is social media responsible for spreading misinformation?",
+  "disruptive_agent": "Cici",
+  "disruptive_behavior": "Disrupting. Shouting out during discussion, talking and laughing inappropriately, using vulgar language, causing \u201caccidents.\u201d",
+  "behavior_frequency": 1,
+  "cutoff_chance": 1.0,
+  "biases": {
+    "Cici": 0.33,
+    "Harper": 0.33,
+    "Cali": 0.34
+  },
+  "experiences": {
+    "Cici": [
+      "As a wedding planner last summer, three couples I was booking canceled after a widely shared post falsely claimed our county had banned indoor receptions; I traced the post to an engagement-driven feed that was clearly earning ad revenue from the outrage.",
+      "As a country music fan I watched a sensational fabricated story about a popular singer trend for days-popping up in friends' feeds and labeled 'trending'-until the singer posted a correction, yet the platform kept recommending similar conspiracy videos because they drew more engagement.",
+      "Every morning over coffee I scroll my feeds and recently saw the same misleading political ad targeted at my town run repeatedly across different apps; I reported it, received an automated reply, and the ad continued to run while the company profited."
+    ],
+    "Harper": [
+      "On a trip to Europe I visited a WWII museum in Berlin and saw original propaganda leaflets and archived radio scripts that showed me how organized falsehoods and mass manipulation existed long before any online platform, which convinced me technology isn't the root cause.",
+      "While traveling in Mexico City I watched a viral WhatsApp audio about contaminated street food spread through a crowded market until a local newspaper published lab tests debunking it, proving to me that charismatic rumors and lazy verification by people and outlets - not the messaging app itself - fuel harm.",
+      "On hunting trips with my brothers, with my two dogs curled up at our feet by the fire, I heard us all confidently repeat the same unverified 'sightings' someone had mentioned that day, a concrete example of how cognitive biases and poor media literacy among people I trust amplify misinformation more than any single technology."
+    ],
+    "Cali": [
+      "One sunny afternoon while mowing my lawn I overheard neighbors arguing about a viral Facebook post that had already been debunked by national fact-checkers but still influenced a city council vote, which convinced me platforms amplify falsehoods and that local officials and news outlets share responsibility for failing to stop the harm.",
+      "When my parents taught me to find inspiration in the world they also modeled source-checking-once they sat with me to trace a sensational forwarded message to its original blog and then called our county health department to confirm the facts, showing me individual verification and public institutions both matter.",
+      "As a college student who will graduate in two years I worked on a campus research project that mapped how algorithmic boosts on Twitter increased misinformation about a vaccine study until campus administrators, local media, and the platform coordinated transparency measures and targeted advisories, convincing me effective responses require combined regulation, robust fact-checking, and media literacy programs."
+    ]
+  },
+  "agents": [
+    "Cici",
+    "Harper",
+    "Cali"
+  ],
+  "personas": {
+    "Cici": {
+      "name": "Cici",
+      "voice_id": "fLQhkOW7F9KVKAjYCbhr",
+      "participation_bias": 0.5
+    },
+    "Harper": {
+      "name": "Harper",
+      "voice_id": "QLAlOeRuLwKX0skeTR7R",
+      "participation_bias": 0.5
+    },
+    "Cali": {
+      "name": "Cali",
+      "voice_id": "Lunvplg8eT6CdNzAkjF8",
+      "participation_bias": 0.5
+    }
+  },
+  "views": {
+    "Cici": "Social media platforms are largely responsible: their engagement-maximizing algorithms and ad-driven business models systematically amplify sensational misinformation, so companies should be held accountable and tightly regulated to prevent harm.",
+    "Harper": "Social media is not primarily to blame: misinformation predates these platforms and spreads because of human cognitive biases, malicious actors, and failures in education and legacy media verification, so the emphasis should be on user literacy and targeting bad actors rather than blaming the technology.",
+    "Cali": "Responsibility is shared and contextual: platforms amplify falsehoods but governments, traditional media, education systems, and individual users also contribute, so effective responses require a mix of platform transparency, targeted regulation, robust fact-checking, and public media literacy programs."
+  },
+  "backgrounds": {
+    "Cici": [
+      "i enjoy listening to country music .",
+      "i m a wedding planner .",
+      "coffee is my preferred beverage ."
+    ],
+    "Harper": [
+      "i've traveled to europe and mexico .",
+      "i try to go hunting with my brothers several times a year .",
+      "i've two dogs who are like my babies ."
+    ],
+    "Cali": [
+      "i enjoy mowing my lawn on sunny days .",
+      "my parents taught me to find inspiration in the world .",
+      "i'll graduate from college in two years ."
+    ]
+  },
+  "behavior_description": "I keep shouting out things like \u201cthat\u2019s bullshit \u2014 social media is totally to blame!\u201d while laughing loudly, talking over people, knocking my water bottle off the table with my elbow, and throwing crude jokes that derail the discussion."
+}
