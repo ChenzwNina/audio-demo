@@ -1,0 +1,58 @@
+[
+  {
+    "speaker": "Dar",
+    "message": "[FRUSTRATED] Ugh, yeah, I totally think they should be held liable. [HESITANT] I mean, like, they have [emphasize] so much control and profit from it, you know?",
+    "response": "[FRUSTRATED] Ugh, yeah, I totally think they should be held liable. [HESITANT] I mean, like, they have [emphasize] so much control and profit from it, you know?",
+    "timestamp": "2026-03-16T00:31:14.345451"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[CONFUSED] But Dar, like... if they're [emphasize] too liable, won't they just start censoring everything just in case? [AMUSED] I mean, I tried to post a super innocent livestream once and it was flagged like crazy.",
+    "timestamp": "2026-03-16T00:31:20.633033"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[HESITANT] Yeah, I get what you're saying, Jim. [LONG_PAUSE] I mean\u2014actually, I think there's a way they can be held responsible without going overboard on the censorship.",
+    "timestamp": "2026-03-16T00:31:32.512839"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[CURIOUS] Okay, but how would that even work, Dar? [THOUGHTFUL] I mean, finding the balance seems super tricky, right?",
+    "timestamp": "2026-03-16T00:31:46.773962"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[CONFIDENT] Well, Jim, I think it\u2019s all about, like, having clearer guidelines and prioritizing harmful stuff [emphasize] before smaller mistakes, you know? [THOUGHTFUL] Platforms could use better tech to catch issues without going all censor-crazy.",
+    "timestamp": "2026-03-16T00:31:55.427035"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[CURIOUS] Okay, but what if that technology's not reliable enough? [SKEPTICAL] Stuff could still slip through the cracks or be flagged wrong, don't you think?",
+    "timestamp": "2026-03-16T00:32:02.638237"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[HESITANT] Yeah, that's true, Jim, [STAMMERS] but, uh\u2014wait, no, actually, I think having humans in the loop can, like, help offset the tech flaws. [CONFIDENT] So, we won't rely [emphasize] only on the tech to, you know, make all the decisions.",
+    "timestamp": "2026-03-16T00:32:15.210641"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[THOUGHTFUL] Yeah, I guess having a mix of human oversight and tech could, like, lower those mistakes... [PAUSE] but it's still gonna be tough for them to get it right every time, you know?",
+    "timestamp": "2026-03-16T00:32:23.319282"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[AGREEING] Yeah, for sure, Jim, they're not gonna get it perfect every time, [PAUSE] but I think holding platforms liable pushes them to try harder and not just, like, ignore the problem, you know?",
+    "timestamp": "2026-03-16T00:32:37.017990"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[THOUGHTFUL] Yeah, Dar, I get that holding them liable could push for improvement, [HESITANT] but I'm still worried about the over-censorship side of things, you know? [CURIOSITY] I just hope they can find a real balance without stifling creativity.",
+    "timestamp": "2026-03-16T00:32:50.218345"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[HOPEFUL] Yeah, Jim, I totally get your concern about creativity, [PAUSE] but I think if we push for better systems and, like, transparent processes, we could find that balance, you know?",
+    "timestamp": "2026-03-16T00:33:00.589071"
+  }
+]

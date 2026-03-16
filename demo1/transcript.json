@@ -1,0 +1,62 @@
+[
+  {
+    "speaker": "Jim",
+    "message": "[THOUGHTFUL] Yeah, I mean, more regulation sounds good in theory, but I'm worried it could end up, like, favoring big companies [PAUSE] and kinda squashing the little guys... [HESITANT] you know?",
+    "timestamp": "2026-03-16T00:10:24.992349"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[AGREEING] Yeah, Jim, that's a good point. [CONFUSED] But how do we make sure we're getting, like, the right balance between protecting people and not, you know, stifling innovation?",
+    "timestamp": "2026-03-16T00:10:32.182626"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[THOUGHTFUL] It's tricky because, like, too much red tape could slow things down, but [CURIOUS] what if we had, like, flexible guidelines that kinda adapt as tech changes?",
+    "timestamp": "2026-03-16T00:10:45.651907"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[INTRIGUED] I think maybe flexible guidelines could kinda work if they, like, adjust as things progress. [HESITANT] But then, who's gonna make sure they're keeping up, you know?",
+    "timestamp": "2026-03-16T00:10:55.196798"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[THOUGHTFUL] Yeah, that's a tough one... [HESITANT] Maybe an independent body or something that, like, keeps an eye on it and makes updates when needed?",
+    "timestamp": "2026-03-16T00:11:05.400047"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[CURIOUS] Yeah, like, an independent body sounds good, but I wonder if they'd have enough power and resources to actually make a difference, you know? [PAUSE] I just don't want it to turn into, like, another layer of bureaucracy.",
+    "timestamp": "2026-03-16T00:11:17.748302"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[AGREEING] Yeah, I get that, Jim. [SKEPTICAL] But, I mean, we can't just rely on companies to regulate themselves, right?",
+    "timestamp": "2026-03-16T00:11:26.660342"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[AGREEING] Yeah, for sure, we can't just, like, completely leave it up to companies. [CONCERNED] But I'm worried if regulations just get too complex or heavy, they might make it really hard for smaller innovators to keep up.",
+    "timestamp": "2026-03-16T00:11:40.333298"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[HESITANT] Yeah, I totally see your concern, Jim. [THOUGHTFUL] Maybe we could, like, prioritize simplifying the process for smaller players without compromising on, you know, important safeguards?",
+    "timestamp": "2026-03-16T00:11:48.714063"
+  },
+  {
+    "speaker": "Jim",
+    "message": "Jim: [AGREEING] Yeah, totally, simplifying the process for smaller players sounds smart. [CURIOUS] But how do we make sure the important stuff doesn't, like, slip through the cracks, you know?",
+    "timestamp": "2026-03-16T00:12:00.965848"
+  },
+  {
+    "speaker": "Dar",
+    "message": "[THOUGHTFUL] That's a good question, Jim. [HESITANT] Maybe we could have periodic reviews to make sure nothing crucial gets missed, like some sorta checkpoints to ensure everything's still on track?",
+    "timestamp": "2026-03-16T00:12:12.321105"
+  },
+  {
+    "speaker": "Jim",
+    "message": "[CURIOUS] Yeah, periodic reviews might help, but do you think they'd catch everything or just add more to, like, the workload? [PAUSE] Maybe there's some tech solution or tool that could, like, assist with the process?",
+    "timestamp": "2026-03-16T00:12:21.451426"
+  }
+]

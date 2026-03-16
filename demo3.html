@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo 3 – User-generated Content</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #141414;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0a0a0a;
+      border-right: 1px solid #2a2a2a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar .section-label {
+      display: block;
+      padding: 8px 20px;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+    }
+    .sidebar .section-label:first-of-type { margin-top: 0; }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px 8px 32px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover { background: #1c1c1c; color: #e0e0e0; }
+    .sidebar a.active { background: #1c1c1c; color: #ffffff; border-right: 3px solid #ffffff; }
+
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1000px;
+    }
+
+    h1 { font-size: 2rem; margin-bottom: 8px; color: #fff; }
+    .subtitle { color: #888; margin-bottom: 20px; }
+
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #1c1c1c;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active { background: #ffffff; color: #141414; }
+
+    .card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    .topic-label {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .topic-label strong { color: #d4a574; }
+
+    .transcript {
+      background: #262626;
+      border-radius: 8px;
+      padding: 16px;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+    .transcript-line {
+      margin-bottom: 10px;
+      line-height: 1.6;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .transcript-line:last-child { margin-bottom: 0; }
+    .transcript-line .timestamp {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      font-size: 0.75rem;
+      color: #777;
+      margin-right: 8px;
+    }
+    .speaker {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 6px;
+      color: #d0d0d0;
+    }
+    .line-text { color: #ccc; }
+    .transcript-line.active {
+      background: #16351f;
+      color: #e8ffe9;
+    }
+    .transcript-line.active .line-text {
+      color: #e8ffe9;
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 800px) {
+      .persona-grid { grid-template-columns: 1fr; }
+    }
+    .persona {
+      background: #262626;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .persona-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .persona-meta {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .persona-instruction {
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <h3>Demo</h3>
+    <span class="section-label">Disruptive Behavior</span>
+    <a href="taxonomy.html">Taxonomy</a>
+    <a href="cutoffs.html">Cut-off</a>
+    <span class="section-label">Live Demos</span>
+    <a href="demo1.html">Demo 1 – AI Regulation</a>
+    <a href="demo2.html">Demo 2 – Misinformation</a>
+    <a href="demo3.html" class="active">Demo 3 – User Content</a>
+    <span class="section-label">Archived</span>
+    <a href="inattention.html">Inattention Demo</a>
+    <a href="apathy.html">Apathy Demo</a>
+    <a href="disrupting.html">Disrupting Demo</a>
+    <a href="index.html">Emotion Demo</a>
+  </nav>
+
+  <div class="main">
+    <div class="mobile-nav">
+      <a href="taxonomy.html">Taxonomy</a>
+      <a href="cutoffs.html">Cut-off</a>
+      <a href="demo1.html">Demo 1</a>
+      <a href="demo2.html">Demo 2</a>
+      <a href="demo3.html" class="active">Demo 3</a>
+    </div>
+
+    <h1>Demo 3 – User-generated Content</h1>
+    <p class="subtitle">Discussion topic: <strong>Should online platforms be held liable for user-generated content?</strong></p>
+
+    <div class="card">
+      <h2>Conversation Audio</h2>
+      <audio id="conversation-audio" controls style="width: 100%; margin-top: 8px;">
+        <source src="demo3/conversation.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <div class="card">
+      <h2>Transcript</h2>
+      <p class="topic-label">Full transcript with the currently playing line highlighted in green.</p>
+      <div id="transcript" class="transcript"></div>
+    </div>
+
+    <div class="card">
+      <h2>Personas</h2>
+      <div id="personas" class="persona-grid"></div>
+    </div>
+  </div>
+
+  <script>
+    async function loadJSON(path) {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error("Failed to load " + path);
+      return res.json();
+    }
+
+    function formatClockTime(seconds) {
+      const d = new Date(seconds * 1000);
+      const mm = String(d.getUTCMinutes()).padStart(2, "0");
+      const ss = String(d.getUTCSeconds()).padStart(2, "0");
+      return mm + ":" + ss;
+    }
+
+    function buildTranscriptLines(items) {
+      if (!items || !items.length) return [];
+      const baseTime = new Date(items[0].timestamp).getTime() / 1000;
+      const container = document.getElementById("transcript");
+      container.innerHTML = "";
+
+      return items.map((item) => {
+        const t = new Date(item.timestamp).getTime() / 1000 - baseTime;
+        const line = document.createElement("div");
+        line.className = "transcript-line";
+        line.dataset.time = String(t);
+
+        const tsSpan = document.createElement("span");
+        tsSpan.className = "timestamp";
+        tsSpan.textContent = formatClockTime(t);
+
+        const speakerSpan = document.createElement("span");
+        speakerSpan.className = "speaker";
+        speakerSpan.textContent = (item.speaker || "Speaker") + ":";
+
+        const textSpan = document.createElement("span");
+        textSpan.className = "line-text";
+        textSpan.textContent = " " + (item.message || item.response || "");
+
+        line.appendChild(tsSpan);
+        line.appendChild(speakerSpan);
+        line.appendChild(textSpan);
+        container.appendChild(line);
+
+        line.addEventListener("click", () => {
+          const audio = document.getElementById("conversation-audio");
+          const time = parseFloat(line.dataset.time || "0");
+          if (!isNaN(time)) {
+            audio.currentTime = time;
+            audio.play();
+          }
+        });
+
+        return { time: t, el: line };
+      });
+    }
+
+    function wireAudioHighlighting(lines) {
+      const audio = document.getElementById("conversation-audio");
+      if (!audio || !lines.length) return;
+
+      let lastActiveIndex = -1;
+      const container = document.getElementById("transcript");
+
+      function setActive(index) {
+        if (index === lastActiveIndex) return;
+        if (lastActiveIndex >= 0) {
+          lines[lastActiveIndex].el.classList.remove("active");
+        }
+        if (index >= 0) {
+          const el = lines[index].el;
+          el.classList.add("active");
+          const rect = el.getBoundingClientRect();
+          const parentRect = container.getBoundingClientRect();
+          if (rect.top < parentRect.top || rect.bottom > parentRect.bottom) {
+            container.scrollTop = el.offsetTop - container.clientHeight / 3;
+          }
+        }
+        lastActiveIndex = index;
+      }
+
+      function updateActive() {
+        const t = audio.currentTime;
+        let idx = -1;
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].time <= t + 0.05) idx = i;
+          else break;
+        }
+        setActive(idx);
+      }
+
+      audio.addEventListener("timeupdate", updateActive);
+      audio.addEventListener("seeked", updateActive);
+      audio.addEventListener("ended", () => setActive(-1));
+    }
+
+    function renderPersonas(data) {
+      const container = document.getElementById("personas");
+      container.innerHTML = "";
+      const entries = Object.values(data || {});
+      entries.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "persona";
+
+        const name = document.createElement("div");
+        name.className = "persona-name";
+        name.textContent = p.name || "Persona";
+
+        const meta = document.createElement("div");
+        meta.className = "persona-meta";
+        meta.textContent = `Participation bias: ${p.participation_bias ?? "—"}`;
+
+        const instruction = document.createElement("div");
+        instruction.className = "persona-instruction";
+        instruction.textContent = (p.instruction || "").trim();
+
+        card.appendChild(name);
+        card.appendChild(meta);
+        card.appendChild(instruction);
+        container.appendChild(card);
+      });
+    }
+
+    async function init() {
+      try {
+        const [transcript, personas] = await Promise.all([
+          loadJSON("demo3/transcript.json"),
+          loadJSON("demo3/personas.json"),
+        ]);
+        const lines = buildTranscriptLines(transcript);
+        wireAudioHighlighting(lines);
+        renderPersonas(personas);
+      } catch (e) {
+        console.error(e);
+        const t = document.getElementById("transcript");
+        t.textContent = "Failed to load demo data.";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
+
