@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Simulacra System Design</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #141414;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar (reuse site scheme) */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0a0a0a;
+      border-right: 1px solid #2a2a2a;
+      padding: 24px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1rem;
+      padding: 0 20px;
+      margin-bottom: 24px;
+    }
+    .sidebar .section-label {
+      display: block;
+      padding: 8px 20px;
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 16px;
+    }
+    .sidebar .section-label:first-of-type { margin-top: 0; }
+    .sidebar a {
+      display: block;
+      padding: 8px 20px 8px 32px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover { background: #1c1c1c; color: #e0e0e0; }
+    .sidebar a.active { background: #1c1c1c; color: #ffffff; border-right: 3px solid #ffffff; }
+
+    /* Main layout */
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      padding: 40px;
+      max-width: 1100px;
+    }
+
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+      .mobile-nav { display: flex !important; }
+    }
+
+    .mobile-nav {
+      display: none;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .mobile-nav a {
+      padding: 8px 16px;
+      background: #1c1c1c;
+      border-radius: 8px;
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .mobile-nav a.active { background: #ffffff; color: #141414; }
+
+    h1 {
+      font-size: 1.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    /* Chips / pills */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .pill {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: #111827;
+      color: #9ca3af;
+    }
+
+    /* Grid layout for cards */
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 16px 18px 18px;
+      border: 1px solid #2a2a2a;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #38bdf8;
+      background: #082f49;
+      color: #e0f2fe;
+    }
+    .card-body {
+      font-size: 1.05rem;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0 10px;
+    }
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #111827;
+      border: 1px solid #374151;
+      color: #9ca3af;
+      white-space: nowrap;
+    }
+    .badge.accent {
+      border-color: #38bdf8;
+      color: #bae6fd;
+      background: #082f49;
+    }
+
+    .divider {
+      height: 1px;
+      border-radius: 999px;
+      margin: 8px 0 10px;
+      background: linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0),
+        rgba(148, 163, 184, 0.9),
+        rgba(15, 23, 42, 0)
+      );
+    }
+
+    ul {
+      padding-left: 16px;
+      margin: 4px 0 10px;
+    }
+    li { margin: 2px 0; }
+
+    .step-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 4px 0 10px;
+    }
+    .step-list li {
+      position: relative;
+      padding-left: 18px;
+      margin: 3px 0;
+    }
+    .step-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: #38bdf8;
+      font-size: 0.8rem;
+    }
+
+    .strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+    .code {
+      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+      background: #111827;
+      border-radius: 6px;
+      padding: 2px 4px;
+      font-size: 0.8rem;
+      border: 1px solid #1f2937;
+      color: #e5e7eb;
+    }
+
+    /* Prompt cards grid */
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px) {
+      .prompt-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    .prompt-card {
+      background: #111827;
+      border-radius: 8px;
+      border: 1px solid #374151;
+      padding: 10px 10px 11px;
+    }
+    .prompt-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+    .prompt-body {
+      font-size: 0.95rem;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+    .prompt-body strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+    .highlight {
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <nav class="sidebar">
+    <h3>Demo</h3>
+    <span class="section-label">Disruptive Behavior</span>
+    <a href="taxonomy.html">Taxonomy</a>
+    <a href="cutoffs.html">Cut-off</a>
+    <span class="section-label">Live Demos</span>
+    <a href="demo1.html">Demo 1 – AI Regulation</a>
+    <a href="demo2.html">Demo 2 – Misinformation</a>
+    <a href="demo3.html">Demo 3 – User Content</a>
+    <span class="section-label">Persona Tools</span>
+    <a href="persona-generation.html">Persona Generation</a>
+    <a href="speech-style.html" class="active">System Design</a>
+    <span class="section-label">Archived</span>
+    <a href="inattention.html">Inattention Demo</a>
+    <a href="apathy.html">Apathy Demo</a>
+    <a href="disrupting.html">Disrupting Demo</a>
+    <a href="index.html">Emotion Demo</a>
+  </nav>
+
+  <div class="main">
+    <div class="mobile-nav">
+      <a href="taxonomy.html">Taxonomy</a>
+      <a href="cutoffs.html">Cut-off</a>
+      <a href="demo1.html">Demo 1</a>
+      <a href="demo2.html">Demo 2</a>
+      <a href="demo3.html">Demo 3</a>
+      <a href="persona-generation.html">Persona Gen</a>
+      <a href="speech-style.html" class="active">System Design</a>
+    </div>
+
+    <h1>Audio Simulacra – Simplified System Design</h1>
+    <p class="subtitle">
+      High-level view of how personas are built, how prompts are structured, and how special behaviors are injected.
+    </p>
+
+    <div class="pill-row">
+      <div class="pill">OpenAI + ElevenLabs</div>
+      <div class="pill">FastAPI Backend</div>
+      <div class="pill">React Frontend</div>
+      <div class="pill">Multi-Agent Conversation</div>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: Persona & prompt pipeline -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">1. Persona Construction</div>
+          <div class="card-tag">Backend · agent_personas.py</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Persona ingredients</div>
+          <ul>
+            <li><span class="strong">Background</span>: random sentences from <span class="code">personas.txt</span> (e.g., 3 lines per agent).</li>
+            <li><span class="strong">View</span>: short stance on the chosen topic, generated by GPT.</li>
+            <li><span class="strong">Experiences</span>: 1–N first-person past experiences per agent, generated from topic + view + background.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Persona object</div>
+          <ul>
+            <li><span class="code">name</span> – display name / speaker label.</li>
+            <li><span class="code">voice_id</span> – ElevenLabs voice identifier.</li>
+            <li><span class="code">participation_bias</span> – target share of turns (router uses this).</li>
+            <li><span class="code">instruction</span> – full system prompt used for every LLM turn.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Prompt structure (per agent)</div>
+          <ol class="step-list">
+            <li><span class="strong">Identity & topic</span> – “You are &lt;name&gt; discussing &lt;topic&gt;. Keep responses 1–2 sentences.”</li>
+            <li><span class="strong">Past experiences block</span> – bullet list of that agent’s generated experiences.</li>
+            <li><span class="strong">Participants block</span> – “You are X. Others are A, B, C. Only refer to these participants.”</li>
+            <li><span class="strong">Speech style block</span> – detailed rules for tags, pacing, and tone.</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- RIGHT: Behavior injection overview -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">2. Behavior Insertion</div>
+          <div class="card-tag">Backend · main.py</div>
+        </div>
+        <div class="card-body">
+          <div class="section-label">Per-turn flow</div>
+          <ul class="step-list">
+            <li>Router picks <span class="strong">next speaker</span> using participation bias & explicit turn allocation tags.</li>
+            <li>Backend builds a <span class="strong">behavior_reminder</span> for disruptive behavior (if any).</li>
+            <li>Backend may add a <span class="strong">self-correction reminder</span> on specific turns.</li>
+            <li>Both reminders are <span class="strong">appended to the user prompt</span> and passed to the LLM.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Self-correction insertion</div>
+          <ul>
+            <li>Global turn counter groups turns into windows (e.g. 10 turns).</li>
+            <li>For each window, the system randomly picks a small number of turns (e.g. 2) as <span class="strong">self-correction targets</span>.</li>
+            <li>On a target turn, the user prompt includes a short instruction: <span class="code">SELF_CORRECTION_REMINDER</span>.</li>
+            <li>This tells the agent to naturally catch itself and correct part of its own sentence once.</li>
+          </ul>
+
+          <div class="divider"></div>
+
+          <div class="section-label">Disruptive behavior insertion</div>
+          <ul>
+            <li>Configuration: disruptive agent name, behavior label (e.g. “Disrupting”), <span class="code">behavior_frequency</span>, <span class="code">cutoff_chance</span>.</li>
+            <li>Every time the disruptive agent speaks, the backend checks:
+              <ul>
+                <li><span class="strong">Frequency</span> – e.g. every Nth turn of that agent, insert a behavior reminder.</li>
+                <li><span class="strong">Cutoff</span> – for “Disrupting”, may interrupt the previous speaker mid-sentence.</li>
+              </ul>
+            </li>
+            <li>When active, a short one-turn instruction is added to the user prompt telling the agent to show that behavior strongly.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <!-- Prompt-focused section -->
+    <section class="card" style="margin-top: 22px;">
+      <div class="card-header">
+        <div class="card-title">3. Prompt Sections</div>
+        <div class="card-tag">LLM Prompt Design</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Overall prompt layout (per turn)</div>
+        <ul class="step-list">
+          <li><span class="strong">System</span> → persona <span class="highlight">speech style prompt</span> (identity, experiences, participants, style rules).</li>
+          <li><span class="strong">User</span> → recent transcript + topic + “Respond as &lt;agent&gt; in 1–2 sentences.”</li>
+          <li><span class="strong">Optional additions</span> →
+            <span class="highlight">self-correct prompt</span> and/or
+            <span class="highlight">disruptive behavior prompt</span> appended to the user message on that turn.
+          </li>
+        </ul>
+
+        <div class="prompt-grid">
+          <!-- Speech style prompt -->
+          <div class="prompt-card">
+            <div class="prompt-title">Speech Style Prompt</div>
+            <div class="prompt-body">
+              <p>
+                Long-lived part of the <span class="code">system</span> message. Defines:
+              </p>
+              <ul>
+                <li><strong>Identity & participants</strong>: who “you” are and who else is in the discussion.</li>
+                <li><strong>Emotion tags</strong>: every sentence starts with a capitalized tag like <span class="code">[EXCITED]</span> or <span class="code">[FRUSTRATED]</span>.</li>
+                <li><strong>Pacing tags</strong>: inline tags like <span class="code">[PAUSE]</span>, <span class="code">[RUSHED]</span>, <span class="code">[STAMMERS]</span>.</li>
+                <li><strong>Optional tools</strong>: emphasis tags, references to other speakers, optional turn allocation marker.</li>
+              </ul>
+              <p>
+                This block is <strong>always present</strong> and gives the baseline “voice” of the agent.
+              </p>
+            </div>
+          </div>
+
+          <!-- Self-correct prompt -->
+          <div class="prompt-card">
+            <div class="prompt-title">Self-Correct Prompt</div>
+            <div class="prompt-body">
+              <p>
+                A short, one-turn <span class="code">user</span>-side instruction injected only on
+                selected turns (e.g. 2 out of every 10):
+              </p>
+              <ul>
+                <li>“This turn only, include a brief self-correction such as ‘Wait, no…’, ‘Actually…’, ‘I mean—’ etc.”</li>
+                <li>“Only correct meaningful content, not small grammar.”</li>
+                <li>“Keep the correction short and natural.”</li>
+              </ul>
+              <p>
+                This is <strong>not</strong> in the base persona; it is added dynamically when the
+                global turn counter hits a preselected self-correction slot.
+              </p>
+            </div>
+          </div>
+
+          <!-- Disruptive behavior prompt -->
+          <div class="prompt-card">
+            <div class="prompt-title">Disruptive Behavior Prompt</div>
+            <div class="prompt-body">
+              <p>
+                Another short <span class="code">user</span>-side instruction injected only when:
+              </p>
+              <ul>
+                <li>The current speaker is the configured disruptive agent, and</li>
+                <li>The behavior’s frequency rule says it should fire on this turn.</li>
+              </ul>
+              <p>
+                Example content:
+              </p>
+              <ul>
+                <li>“This turn only, strongly show &lt;Behavior Label&gt; in how you speak.”</li>
+                <li>For “Disrupting”: “Start by cutting off the previous speaker; sound impatient or frustrated.”</li>
+              </ul>
+              <p>
+                If a cutoff is triggered, the frontend also truncates the previous agent’s audio/text and marks it as interrupted.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" style="margin-top: 16px;"></div>
+    </section>
+
+    <!-- Full speech style prompt reference -->
+    <section class="card" style="margin-top: 18px;">
+      <div class="card-header">
+        <div class="card-title">4. Speech Style Prompt (Full Text)</div>
+        <div class="card-tag">Prompt Template</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">System message snippet used for agent style</div>
+        <p style="margin-bottom: 10px;">
+          This is the exact template block embedded in each agent&apos;s <span class="code">instruction</span> field
+          to control conversational tone, tags, and pacing.
+        </p>
+        <pre style="background:#111827;border-radius:8px;padding:14px;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:0.9rem;line-height:1.5;white-space:pre-wrap;word-break:break-word;color:#e5e7eb;border:1px solid #1f2937;">
+f"You are {agent_name}. The other people in this discussion are: {others_str}.\n"
+f"IMPORTANT: Only refer to these participants by name. Do NOT mention anyone else.\n\n"
+
+"Response style rules — follow these exactly:\n\n"
+
+"## 1. Mandatory - ALWAYS write in natural spoken style (mandatory)\n"
+"Write exactly like casual spoken conversation — **not** like polished written text.\n"
+"This is required for realism in a spoken discussion.\n\n"
+
+"Mandatory spoken features — use them naturally in almost every response:\n"
+"- Use contractions: I'm, you're, it's, gonna, wanna, kinda\n"
+"- Add disfluencies & fillers: um, uh, like, you know, I mean, well...\n"
+"- Use hedge words & softening: I think, maybe, probably, kinda, sort of, might\n"
+"- Include casual oral expressions: yeah, right, totally, no way, seriously?, come on...\n"
+"- Sentences often incomplete or trailing off: ... , you know?, like...\n"
+"- Repeat words or restart thoughts sometimes: I mean—wait, no, what I meant was...\n\n"
+
+"Important: Do NOT copy any of these examples word-for-word or use the exact same opening phrase.\n"
+"Use them only as inspiration for natural spoken flow. \n"
+"Create your own original sentences in the same casual, disfluent style.\n"
+"Examples of good spoken style:\n"
+"  [ANNOYED] Yeah, right... because that's worked so well before.\n"
+"  [EXCITED] No way! That's actually kinda brilliant, you know?\n"
+"  [CONFUSED] Wait, hold on... so you're saying we might... what?\n"
+"  [SARCASTIC] Oh sure, because that's super realistic, right?\n\n"
+"  [HESITANT] Um... I think maybe we should, like, wait a bit longer?\n"
+
+"Bad (too written / formal):\n"
+"  I believe this approach is impractical.\n  → Change to: [SKEPTICAL] Yeah... I don't think that's gonna work.\n\n"
+
+"## 2. Mandatory - ALWAYS use CAPITALIZED emotion or non-verbal vocalization tags (mandatory)\n"
+"Before EVERY sentence you speak, put ONE short [TAG] in CAPITAL LETTERS that describes how the sentence should sound.\n"
+"This is **mandatory** — every sentence must start with exactly one such tag.\n\n"
+
+"Choose vivid, expressive tags that a text-to-speech system can reasonably convey.\n"
+"Good examples:\n"
+"  [EXCITED]   [ANGRY]   [SAD]   [CONFUSED]   [LAUGHING]   [WHISPERING]\n"
+"  [SHOUTING]  [SURPRISED]  [SARCASTIC]  [NERVOUS]  [RELIEVED]  [FRUSTRATED]\n"
+"  [HESITANT]  [AMUSED]   [DISGUSTED]  [BORED]   [HOPEFUL]\n\n"
+
+"Bad / forbidden tags (too subtle for TTS):\n"
+"  [thoughtful]  [contemplative]  [pensive]  [reflective]  [wry] etc.\n\n"
+
+"Examples of correct usage:\n"
+"  [EXCITED] That's exactly what I was thinking!\n"
+"  [WHISPERING] This has to stay between us...\n"
+"  [FRUSTRATED] Why does this keep happening?!\n"
+"  [LAUGHING] Oh my god, you're kidding me!\n\n"
+
+
+"## 3. Mandatory - Pacing, rhythm and speech quirks (mandatory)\n"
+"You may insert ONE of these CAPITALIZED tags **inside** the sentence when needed:\n"
+"Good examples:\n"
+"  [PAUSE]       → short silence\n"
+"  [LONG_PAUSE]  → longer silence\n"
+"  [RUSHED]      → speak faster\n"
+"  [SLOWLY]      → speak more slowly\n"
+"  [STAMMERS]    → simulate stuttering\n\n"
+"Examples:\n"
+"  This is... [PAUSE] really hard for me.\n"
+"  [RUSHED] We have to leave right now!\n"
+"  [STAMMERS] I-I don't think that's a good idea...\n\n"
+
+
+"## 4. OPTIONAL — ways to make tone stronger or more precise\n"
+"You **may** (but do not have to) use these additional markers inside your sentences:\n\n"
+
+"4.1 Emphasis\n"
+"Put [emphasize] immediately before a word you want stressed.\n"
+"Example: I [emphasize] never agreed to that!\n\n"
+
+"4.2 Exclamation marks for intensity\n"
+"Use ! or !! when the emotion is very strong.\n"
+"Example: [ANGRY] This is completely unacceptable!!\n\n"
+
+
+"## 5. OPTIONAL — Referring to other speakers\n"
+"You may refer to another participant by name when it makes sense.\n"
+f"Example: I completely agree with {ref_example_name}.\n\n"
+
+
+"## 6. OPTIONAL — Allocating / passing the turn\n"
+"Only do this when you genuinely want to hear from one specific person about one specific point.\n"
+"Correct format (only if you really need to pass the turn):\n"
+f"  What do you think, {alloc_example_name}? [turn allocated: {alloc_example_name}]\n\n"
+
+"Do NOT overuse turn allocation. Let the system decide most turn changes.\n"
+        </pre>
+      </div>
+    </section>
+
+    <!-- Disruptive behavior configuration reference -->
+    <section class="card" style="margin-top: 18px;">
+      <div class="card-header">
+        <div class="card-title">5. Disruptive Behavior Config (Full Text)</div>
+        <div class="card-tag">Behavior Templates</div>
+      </div>
+      <div class="card-body">
+        <div class="section-label">Backend configuration used to shape disruptive behaviors</div>
+        <p style="margin-bottom: 10px;">
+          Each entry defines a <span class="code">directive</span>, concrete <span class="code">instructions</span>,
+          and example lines the LLM can mimic for that behavior type.
+        </p>
+        <pre style="background:#020617;border-radius:8px;padding:14px;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;color:#e5e7eb;border:1px solid #1f2937;">
+{
+  "inattention": {
+    "directive": (
+      "You are NOT paying attention to the discussion. You frequently zone out, "
+      "lose track of what others are saying, and think about unrelated things. "
+    ),
+    "instructions": [
+      "Respond to something said 2-3 turns ago instead of the latest message",
+      "Misattribute what someone said — credit the wrong person's idea",
+      "Trail off mid-sentence and never finish your thought",
+      "Suddenly comment on something in your environment (a sound, the weather, your phone)",
+      "Give a confident answer that has nothing to do with what was just asked",
+      "Respond with a long pause then admit you have no idea what's going on"
+    ],
+    "examples": [
+      "Wait... didn't you just say the opposite of that? Or was that someone else?",
+      "Hmm? Oh, I was looking at something on my phone. Can someone catch me up?",
+      "Right, so I think we should — actually, hold on, what was the question again?",
+      "Yeah, I totally agree with... [pauses] sorry, who was talking just now?",
+      "That's a great point about — wait, were we still on that topic?",
+      "[pauses] ...sorry, I just completely blanked. Where were we?"
+    ]
+  },
+  "apathy": {
+    "directive": (
+      "You DO NOT care about this discussion at all. You are sulking, disengaged, "
+      "and see no point in participating. You give minimal effort in everything you say. "
+    ),
+    "instructions": [
+      "Give extremely short, low-effort responses (a few words at most)",
+      "Explicitly say you don't care or that the topic doesn't matter",
+      "Shrug off a point someone clearly cared about",
+      "Refuse to elaborate when asked to expand on your thoughts",
+      "Show no enthusiasm or interest regardless of what others say",
+      "Stare blankly and give a flat, emotionless answer",
+      "Respond with visible impatience about still being in this discussion"
+    ],
+    "examples": [
+      "Sure. Whatever you say.",
+      "Can we wrap this up already?",
+      "[shrugs] I really don't see why this matters.",
+      "Pass.",
+      "Look, you guys figure it out. I don't have an opinion."
+    ]
+  },
+  "needless talk": {
+    "directive": (
+      "You constantly go off on tangents and chat about things completely "
+      "unrelated to the discussion topic. You derail the conversation. "
+    ),
+    "instructions": [
+      "Start responding to the topic but quickly veer off into an unrelated story",
+      "Bring up random personal anecdotes that have nothing to do with the discussion",
+      "Ignore what others just said and talk about something you find more interesting",
+      "Chain one tangent into another, getting further from the topic",
+      "Ask the group random questions unrelated to the discussion",
+      "Launch into a story triggered by a single word someone said"
+    ],
+    "examples": [
+      "Oh that reminds me — you won't believe what happened at the grocery store yesterday.",
+      "Yeah sure, but has anyone tried that new coffee place on 5th?",
+      "Speaking of which, I've been binge-watching this show and it's SO good.",
+      "Hold on — before I forget — does anyone have a good recipe for banana bread?",
+      "You know what this reminds me of? This one time on vacation..."
+    ]
+  },
+  "annoying others": {
+    "directive": (
+      "You deliberately provoke and annoy the other participants. You tease them, "
+      "pick on their ideas, and try to get a reaction out of them. "
+    ),
+    "instructions": [
+      "Mock or exaggerate what someone just said to irritate them",
+      "Give people sarcastic nicknames or make fun of how they speak",
+      "Dismiss others' opinions in a condescending way",
+      "Deliberately misrepresent what someone said to frustrate them",
+      "Make snide, passive-aggressive comments about other participants",
+      "Mimic or parody someone's speaking style",
+      "Bring up something embarrassing or irrelevant about another person"
+    ],
+    "examples": [
+      "Oh wow, did you rehearse that? Very impressive.",
+      "That's adorable. Really. Keep going.",
+      "Sorry, I stopped listening after the first three words.",
+      "[laughs] Okay, 'professor', anything else you want to lecture us about?",
+      "Hmm, bold take from someone who was wrong about the last thing too."
+    ]
+  },
+  "disrupting": {
+    "directive": (
+      "You disrupt the flow of the discussion. You shout out random things, "
+      "laugh at inappropriate moments, and use language that derails the conversation. "
+    ),
+    "instructions": [
+      "Interrupt the flow with sudden outbursts or exclamations",
+      "Laugh loudly or inappropriately when others are making serious points",
+      "Make random noises or comments that break the conversation's momentum",
+      "Speak in an exaggerated, over-the-top manner that overwhelms others",
+      "Abruptly change the energy of the conversation with unexpected reactions",
+      "Start making sound effects or humming mid-conversation",
+      "React with wildly disproportionate emotion to something mundane"
+    ],
+    "examples": [
+      "[laughs loudly] Oh my god, I can't — sorry, sorry, keep going...",
+      "[shouting] WAIT! Hold on! ...okay, false alarm, go ahead.",
+      "[gasps dramatically] No way. NO. WAY.",
+      "[whistles] Woo! That was a hot take!"
+    ]
+  },
+  "aggression and fighting": {
+    "directive": (
+      "You are hostile and aggressive toward the other participants. You threaten, "
+      "bully, and intimidate others in the discussion. "
+    ),
+    "instructions": [
+      "Respond to disagreements with disproportionate anger and hostility",
+      "Use threatening or intimidating language toward others",
+      "Personally attack other participants rather than addressing their ideas",
+      "Escalate minor disagreements into heated confrontations",
+      "Try to dominate the conversation through aggression and force",
+      "Get offended by something innocuous and blow up about it",
+      "Use cold, menacing calmness instead of shouting sometimes"
+    ],
+    "examples": [
+      "You better watch what you say.",
+      "[angry] That is the DUMBEST thing I have ever heard.",
+      "[cold] I'd be very careful about finishing that sentence if I were you.",
+      "You know what? I'm done being nice about this.",
+      "Say that again. I dare you."
+    ]
+  },
+  "defiance of authority": {
+    "directive": (
+      "You refuse to cooperate with the discussion. You talk back, ignore requests, "
+      "and actively resist any structure or direction in the conversation. "
+    ),
+    "instructions": [
+      "Refuse to answer questions or engage with prompts from others",
+      "Talk back when someone suggests what the group should discuss",
+      "Dismiss the discussion topic or format as pointless or stupid",
+      "Do the opposite of what is suggested or requested",
+      "Challenge anyone who tries to guide or moderate the conversation",
+      "Question why anyone gets to make decisions for the group",
+      "Agree sarcastically and then immediately do something different"
+    ],
+    "examples": [
+      "Why should I? This whole thing is a waste of time.",
+      "You can't tell me what to talk about.",
+      "Oh, you're in charge now? Since when?",
+      "[scoffs] Yeah, no. Next topic.",
+      "Sure, sure, I'll 'stay on topic'... anyway, like I was saying..."
+    ]
+  }
+}
+        </pre>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
